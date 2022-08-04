@@ -1,0 +1,44 @@
+@import 'variables';
+
+html {
+  display: table;
+  margin: auto;
+}
+body{
+  background-color:$primary !important;
+  color:white;
+  overflow:hidden;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.wrapper_login {
+  width: 20em;
+  min-height: 100%;
+  margin-top: 20vh;
+
+  img{
+    width: 100px;
+    height: 100px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  label{
+    color:$flat !important;
+  }
+
+  button{
+    width:200px;
+    margin-top:10px;
+    margin-left: 3.5em;
+  }
+}
+
+.center {
+  margin: auto;
+  width: 50%;
+  border: 3px solid green;
+  padding: 10px;
+}
