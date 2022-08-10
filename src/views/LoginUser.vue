@@ -40,6 +40,11 @@ export default {
       showLoginError: false
     };
   },
+  created() {
+    if (this.$store.getters.isLoggedIn) {
+      this.$router.replace("DashboardUser");
+    }
+  },
   methods: {
     async login() {
       this.showLoginError = false
