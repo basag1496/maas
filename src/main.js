@@ -12,7 +12,7 @@ if (token) {
 axios.interceptors.response.use(function (response) {
   return response
 }, function (error) {
-  if (error.response.status === 401) {
+  if (error.response.status === 401 && token) {
     store.dispatch('logout')
     window.location = '/'
   }
