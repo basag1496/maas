@@ -9,7 +9,7 @@
         <br>
       </div>
       <div class='col-lg-12 col-sm-12 col-xs-12'>
-        <label for='email'>Correo Electronico</label>
+        <label for='email'>Correo Electrónicos</label>
         <input type='email' class='form-control' v-model='email' 
         placeholder='Email' required>
         <br>
@@ -21,7 +21,7 @@
       </div>
       <div class='row col-12 col-sm-12 col-xs-12 align-self-center '>
         <button type='submit' class='btn btn-lg btn-block  btn-primary' @click.prevent='login'>
-          Iniciar Session
+          Iniciar Sesión
         </button>
       </div>
     </div>
@@ -52,11 +52,9 @@ export default {
         email: this.email,
         password: this.password,
       });
-      if (response) {
-        this.$router.replace("DashboardUser");
-      } else {
+      if (!response) {
         this.showLoginError = true
-      }
+      } 
     },
   }
   

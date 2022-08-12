@@ -28,6 +28,11 @@
                   <td v-if="assignment.confirmeds.count < 1 && editMode == false">
                     <b-icon icon="exclamation-triangle" style='color:#d9aa00;'> </b-icon>
                   </td>
+                  <td v-if="assignment.confirmeds.count > 0 && editMode == false"
+                    :style="{'background-color': `${assignment.confirmeds.worker_first_color}`}"  
+                  >
+                    {{assignment.confirmeds.worker_first_name}}
+                  </td>
                 </tr>
               </tbody>
             </table> 
@@ -36,9 +41,18 @@
             <div v-for='worker_list in day' v-bind:key='worker_list.token' >
               <td v-for='worker in worker_list.confirmetions' 
                   v-bind:key='worker.token'
-                  style='text-align:center; flot:left;'
-              >
-                <input type='checkbox' style='float:right;'>
+                  style='text-align:center; flot:left;'>
+
+                  <input type='checkbox' v-if="worker.editable" 
+                  style='margin-top:10px; margin-left:10px;' 
+                  :checked='worker.confirmed'
+                  v-on:change="confirm(worker.id,$event)"
+                  > 
+
+                  <input type='checkbox' v-if="worker.editable == false" 
+                  style='margin-top:10px; margin-left:10px;' 
+                  :checked='worker.confirmed' disabled> 
+
               </td>
             </div> 
           </div>
@@ -53,7 +67,7 @@ import Vue from 'vue'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
-
+import axios from 'axios'
 // Make BootstrapVue available throughout your project
 Vue.use(BootstrapVue)
 // Optionally install the BootstrapVue icon components plugin
@@ -66,6 +80,18 @@ export default {
   },
   created(){
     console.log(this.$props.data);
+  },
+  methods:{
+    confirm: function(confirmation_id, event){
+      let instance = this
+      axios.post(`/assignments/confirme/${confirmation_id}/${event.target.checked}`)
+      .then(function(){
+        instance.$root.$emit('refresh_assignment')
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+    }
   }
 
 }

@@ -37,12 +37,14 @@ export default new Vuex.Store({
         localStorage.setItem('token', token)
         localStorage.setItem('isLoggedIn', true)
         context.commit('setToken', token);
-        return true;
+        window.location = '/DashboardUser'
+        return true
       })
       .catch(() => {
         localStorage.removeItem('token')
         return false
       });  
+      
     },
     logout({ commit }) {
       return new Promise((resolve) => {
