@@ -1,0 +1,79 @@
+@import 'variables';
+
+html {
+  display: inline;
+}
+body{
+  background-color:$primary !important;
+  overflow:hidden;
+  display: inline;
+}
+
+.sidebar{
+  text-align: center;
+  color:$flat;
+  img{
+    width: 100px;
+    height: 100px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+  }
+
+  h2{
+    margin-top: 30px
+  }
+
+  button{
+    margin-top: 20px;
+    padding: 10px
+  }
+
+}
+
+#schedule_container{
+  width: 100%;
+  height: 100vh;
+  background-color: white;
+  padding: 10px;
+}
+
+#schuduler_grid{
+  display:grid;
+  grid-template-columns:auto auto auto;
+  margin-top:70px;
+
+  .divider{
+    margin: 10px;
+  }
+
+  div{
+    padding:0px;
+    table {
+      width:100%;
+      text-align:center;
+      padding: 0em;
+      thead {
+        div{
+          padding: 0em;
+        }
+      }
+      th{
+        width:50%;
+        font-weight:bold;
+        background-color:#ddd;
+      }
+      td{
+        width:50%;
+        padding:0em;
+  
+        input[type="checkbox"]{
+          float:right;
+        }
+      }
+    }
+  }
+  
+
+}

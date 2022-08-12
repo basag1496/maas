@@ -6,13 +6,19 @@ Vue.use(Vuex)
 const base_url = 'http://localhost:3000';
 export default new Vuex.Store({
   state: {
-    token:''
+    token:'',
+    status: localStorage.getItem('token')
   },
   getters: {
+    isLoggedIn: state => state.status,
   },
   mutations: {
     setToken(state, t) {
       state.token = t;
+      state.status = true;
+    },
+    logout(state) {
+      state.status = false;
     }
   },
   actions: {
@@ -21,15 +27,32 @@ export default new Vuex.Store({
         user:{
           email: credentials.email,
           password: credentials.password
-        }
+        },
+        headers: {
+          'Content-Type': 'application/json'
+          }
       })
       .then(res => {
-        context.commit('setToken', res.data.token);
-        return true;
+        let token = res.headers['authorization']
+        localStorage.setItem('token', token)
+        localStorage.setItem('isLoggedIn', true)
+        context.commit('setToken', token);
+        window.location = '/DashboardUser'
+        return true
       })
-      .catch(error => {
-        console.error(error);
+      .catch(() => {
+        localStorage.removeItem('token')
+        return false
       });  
+      
+    },
+    logout({ commit }) {
+      return new Promise((resolve) => {
+        commit('logout')
+        localStorage.removeItem('token')
+        localStorage.setItem('isLoggedIn', false)
+        resolve()
+      })
     }
   },
   modules: {
