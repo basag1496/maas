@@ -16,10 +16,6 @@
               <button class="btn btn-warning" @click="editWorker(worker)">
                 <b-icon-pencil-fill font-scale="0.9"></b-icon-pencil-fill>
               </button>
-              <button class="btn btn-danger" @click="destroy(worker)" 
-               style='margin-left:10px;'>
-                <b-icon-trash font-scale="0.9"></b-icon-trash>
-              </button>
             </td>
           </tr>
         </tbody>
